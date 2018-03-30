@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Web</title>
+  </head>
+  <body>
+      <h1> C4E Blog</h1>
+
+
+      <!--jinja2 template -->
+      {% for post in posts %}
+
+      <h3> {{ post.title }}</h3>
+      <p>
+        {{ post.content}}
+      </p>
+      <i>By:
+        <!-- conditional expressions -->
+        {{ 'Mr' if post.gender == 1 else 'Ms' }}
+
+         {{ post.author }}</i>
+      {% endfor %}
+
+      {#
+      <!-- <h3> {{ posts[1]['title'] }}</h3>
+      <p>
+        {{ posts[1]['content'] }}
+      </p>
+      <i>By: {{ posts[1]['author'] }}</i> -->
+
+
+      <!-- <h3>Ăn kem</h3>
+      <p>
+        Ngày ngày ta đứng bên em
+        Ta đứng trước cổng ăn kem Tràng Tiền
+      </p>
+      <i>By: Diễn </i>
+
+      <h3>Tao đẹp </h3>
+      <p>
+        Em không làm thơ được
+      </p>
+      <i>By: Nhi</i>
+
+      <h3>Sa</h3>
+      <p>
+        Em thì là của người ta
+      </p>
+      <i>By: Quyền</i> -->
+      #}
+
+  </body>
+</html>
