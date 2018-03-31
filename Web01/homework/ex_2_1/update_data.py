@@ -18,4 +18,7 @@ new_user={
 for key in new_user:
     new_user[key] = input('Please enter {}: '.format(key))
 
-users.insert_one(new_user)
+if users.find_one({'username':new_user['username']}):
+    users.replace_one({'username':new_user['username']},new_user)
+else:
+    users.insert_one(new_user)
