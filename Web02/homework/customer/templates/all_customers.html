@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Customer</title>
+  </head>
+  <body>
+    {%for customer in all_customers%}
+    <ul>
+      <li>Name: {{customer.name}}</li>
+      <li>{% if customer.gender == 0 %}
+          Gender : Female
+          {% else %}
+          Gender : Male
+          {% endif %}
+      </li>
+      <li>Email: {{ customer.email }}</li>
+      <li>Phone number: {{ customer.phone }}</li>
+      <li>Job: {{ customer.job }}</li>
+      <li>Company: {{ customer.company }}</li>
+      <li>Contacted: {{ customer.contacted }}</li>
+    </ul>
+    <hr>
+    {%endfor%}
+
+  </body>
+</html>

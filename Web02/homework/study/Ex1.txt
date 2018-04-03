@@ -1,0 +1,21 @@
+Q: Are there any duplicate ids in the records?
+If yes, put screenshots of the records which are so in your answer
+If no, why? Guess what information this is field represents and its implication/application
+
+
+A: No. Because in MongoDB, each document stored in a collection requires an unique _id field that acts as a primary key.
+If an inserted document omits the _id field, the MongoDB driver automatically generates an ObjectId for the _id field.
+
+  An ObjectId is unique because ObjectId value consist of 12 bytes,
+  where the first four bytes are a timestamp that reflect the ObjectId’s creation.
+  Specifically:
+    a 4-byte value representing the seconds since the Unix epoch (January 1, 1970 00:00 UTC)
+    a 3-byte machine identifier,
+    a 2-byte process id,
+    a 3-byte counter, starting with a random value.
+  In summary, the _id's first nine bytes guarantee its uniqueness across machines and processes, in relation to a single second;
+  the last three bytes provide uniqueness within a single second in a single process.
+
+Applications of _id field is organization and handling of documents.
+Default ObjectIds with first four bytes are a timestamp that reflect the ObjectId’s creation, we can access the creation of their timestamps for seeing precisely when a document was created and sort documents with a rough adherence to when they were created.
+Additionally, because the _id field is unique, we can find exactly a document in collection by id

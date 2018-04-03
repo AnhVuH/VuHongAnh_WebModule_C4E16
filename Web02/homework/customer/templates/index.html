@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Mùa đông không lạnh</title>
+  </head>
+  <body>
+    <h1>Mùa Đông không lạnh</h1>
+    <div>
+      <iframe width="854" height="480" src="https://www.youtube.com/embed/PhAdr_d1u74" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <a href="{{ url_for('show_filtered_customers',gender = 1 )}}"><button>Show male customers not-yet-contacted</button></a>
+    <br>
+    <a href="{{ url_for('show_filtered_customers',gender = 0 )}}"><button>Show Female customers not-yet-contacted</button></a>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Not-yet-contacted Customers</title>
+  </head>
+  <body>
+
+    {% if gender == 1 %}
+    <h1> Male Customers</h1>
+    <div >
+      <iframe width="854" height="480" src="https://www.youtube.com/embed/Pdg3IW71hNk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    {%else%}
+      <h1> Female Customers</h1>
+    <div >
+    <iframe width="854" height="480" src="https://www.youtube.com/embed/dWlnwlJlOwY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    {%endif%}
+    {% for customer in customers %}
+    <p>Name: {{customer.name}} </p>
+    <p> {% if customer.gender == 0 %}
+        Gender : Female
+        {% else %}
+        Gender : Male
+        {% endif %}</p>
+    <p>Email: {{ customer.email }} </p>
+    <p>Phone number: {{ customer.phone }}</p>
+    <p>Job:{{ customer.job }} </p>
+    <p>Comapny: {{ customer.company }}</p>
+    <p>Contacted:{{ customer.contacted}} </p>
+    <hr>
+    {% endfor%}
+
+  </body>
+</html>
