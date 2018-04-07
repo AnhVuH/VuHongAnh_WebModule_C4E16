@@ -26,8 +26,8 @@
     <input type="text" name="address" value="{{service.address}}">
     <br>
     <label>Trạng thái</label>
-    <input type="radio" name="status" value= True checked> Rảnh
-    <input type="radio" name="status" value= False> Bận
+    <input type="radio" name="status" value= 1 checked> Rảnh
+    <input type="radio" name="status" value= 0> Bận
     <br>
     <label>Ảnh</label>
     <img src={{service.image}} alt="Not found" width = 100 height = 100>
@@ -40,11 +40,11 @@
     <label>Số đo 3 vòng</label>
     {% if service.measurements != [] %}
       {% for measurement in service.measurements%}
-      <input type="number" name="{loop.index}" value= {{ measurement }} >
+      <input type="number" name="{{loop.index}}" value= {{ measurement }} >
       {% endfor %}
     {% else %}
       {% for i in range(3)%}
-      <input type="number" name="{loop.index}" value= '0' >
+      <input type="number" name="{{loop.index}}" value= 0 >
       {% endfor %}
     {% endif %}
     <br>

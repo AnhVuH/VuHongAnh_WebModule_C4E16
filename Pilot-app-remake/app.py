@@ -68,12 +68,15 @@ def update_service(id_to_update):
             height = form['height']
             phone = form['phone']
             address = form['address']
-            status = form['status']
+            if form['status'] == 0:
+                status = False
+            else:
+                status = True
             image = form['image']
             description = form['description']
-            # measurements = [form['1'], form['2'], form['3']]
+            measurements = [form['1'], form['2'], form['3']]
             service.update(set__name=name, set__yob=yob, set__gender =gender, set__height= height, set__phone=phone,
-                      set__address = address, set__status = status, set__image = image, set__description = description)
+                      set__address = address, set__status = status, set__image = image, set__description = description, set__measurements=measurements)
             service.reload()
         return redirect(url_for('admin'))
 
