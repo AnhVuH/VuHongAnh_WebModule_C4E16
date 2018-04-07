@@ -1,4 +1,4 @@
-from mongoengine import Document, StringField, IntField, BooleanField
+from mongoengine import Document, StringField, IntField, BooleanField,URLField,ListField
 
 # Create collection
 # Design database
@@ -10,6 +10,9 @@ class Service(Document):
     phone = StringField()
     address = StringField()
     status = BooleanField()
+    image = URLField()
+    description = StringField()
+    measurements = ListField()
 
 # class Customer(Document):
 #     name = StringField()

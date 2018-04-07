@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Mùa đông không lạnh</title>
+  </head>
+  <body>
+    <h1>Danh sách đối tượng </h1>
+    <a href={{ url_for('create')}}><button type="button" name="button">Thêm đối tượng</button> </a>
+    <table border="2px">
+      <thead>
+        <th>STT</th>
+        <th>Tên</th>
+        <th>Năm sinh</th>
+        <th>Giới tính</th>
+        <th>Chiều cao</th>
+        <th>SĐT</th>
+        <th>Địa chỉ</th>
+        <th>Trạng thái</th>
+        <th>Ảnh</th>
+        <th>Mô tả</th>
+        <th>Số đo 3 vòng</th>
+        <th></th>
+      </thead>
+      <tbody>
+        {% for service in all_services%}
+        <tr>
+          <td>{{loop.index}}</td>
+          <td>{{ service.name}}</td>
+          <td>{{ service.yob}}</td>
+          <td>{% if service.gender == 0 %} Nữ
+          {% elif service.gender ==1 %} Nam
+          {% endif %}</td>
+          <td>{{service.height}}</td>
+          <td>{{service.phone}}</td>
+          <td>{{service.address}}</td>
+          <td>{% if service.status == True %} Rảnh
+          {% elif service.status ==False %} Bận
+          {% endif %}</td>
+          <td><img src={{service.image}} alt="not found" width = 100 height =100></td>
+          <td>{{service.description}}</td>
+          <td>{% for measurement in service.measurements %}
+                                   {{ measurement }} {{ '-' if loop.index < 3}}
+                                  {% endfor %}</td>
+          <td> <a href={{ url_for('update_service', id_to_update = service.id) }}>Sửa</a>
+            <br>
+              <a href={{ url_for('delete', id_to_del = service.id) }}>Xóa</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </body>
+</html>

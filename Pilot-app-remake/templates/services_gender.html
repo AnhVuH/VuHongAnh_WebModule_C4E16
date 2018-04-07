@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Mùa đông không lạnh</title>
+  </head>
+  <body>
+      <h1>Danh sách kết bạn</h1>
+      {% for service in services_o %}
+      {{loop.index}}.<img src="http://via.placeholder.com/300x200" alt="not found">
+      <br>
+      {{service.name}}
+        <br>
+      {{service.yob}}
+        <br>
+      {{service.height}}
+      <a href={{ url_for("show_detail", id_to_find = service.id) }}>Chi tiết</a>
+
+        <hr>
+      {% endfor%}
+
+  </body>
+</html>

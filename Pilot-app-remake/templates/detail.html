@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Mùa đông không lạnh</title>
+  </head>
+  <body>
+    <img src= {{ service.image }} alt="not found" width = 300 height =200 >
+    <h2>{{ service.name }}</h2>
+    <p><b>Năm sinh:</b> {{service.yob}}</p>
+    <p><b>Cao:</b> {{service.height}}</p>
+    <p><b>Số điện thoại:</b> {{service.phone}}</p>
+    <p><b>Địa chỉ:</b> {{service.address}}</p>
+    <p><b>Mô tả:</b> {{service.description}}</p>
+    <p><b>Số đo 3 vòng:</b> {% for measurement in service.measurements %}
+                             {{ measurement }} {{ '-' if loop.index < 3}}
+                            {% endfor %}</p>
+  </body>
+</html>

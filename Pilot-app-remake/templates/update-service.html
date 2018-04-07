@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Mùa đông không lạnh</title>
+  </head>
+  <body>
+    <h1>Cập nhật thông tin </h1>
+    <form  method="post">
+    <label>Tên</label>
+    <input type="text" name="name" value= "{{service.name}}">
+    <br>
+    <label>Năm sinh</label>
+    <input type="number" name="yob" value={{service.yob}}>
+    <br>
+    <label>Giới tính</label>
+    <input type="number" name="gender" value={{service.gender}}>
+    <br>
+    <label>Chiều cao</label>
+    <input type="number" name="height" value={{service.height}}>
+    <br>
+    <label>SĐT</label>
+    <input type="number" name="phone" value={{service.phone}}>
+    <br>
+    <label>Địa chỉ</label>
+    <input type="text" name="address" value="{{service.address}}">
+    <br>
+    <label>Trạng thái</label>
+    <input type="radio" name="status" value= True checked> Rảnh
+    <input type="radio" name="status" value= False> Bận
+    <br>
+    <label>Ảnh</label>
+    <img src={{service.image}} alt="Not found" width = 100 height = 100>
+    <br>
+    <input type="url" name="image" value={{service.image}} style = "width: 1000px">
+    <br>
+    <label>Mô tả</label>
+    <input type="text" name="description" value="{{service.description}}" style = "width: 500px">
+    <br>
+    <label>Số đo 3 vòng</label>
+    {% if service.measurements != [] %}
+      {% for measurement in service.measurements%}
+      <input type="number" name="{loop.index}" value= {{ measurement }} >
+      {% endfor %}
+    {% else %}
+      {% for i in range(3)%}
+      <input type="number" name="{loop.index}" value= '0' >
+      {% endfor %}
+    {% endif %}
+    <br>
+    <input type="submit" name="" value="Submit">
+    </form>
+  </body>
+</html>
