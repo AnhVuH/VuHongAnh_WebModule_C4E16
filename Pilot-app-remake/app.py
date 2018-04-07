@@ -19,7 +19,7 @@ def search_gender(gender_i):
 @app.route('/detail/<id_to_find>')
 def show_detail(id_to_find):
     service = Service.objects.with_id(id_to_find)
-    print(id_to_find)
+    # print(id_to_find)
     return render_template('detail.html',service = service)
 
 @app.route('/admin')
@@ -46,8 +46,9 @@ def create():
         yob = form['yob']
         phone = form['phone number']
         gender = form['gender']
+        image = "http://via.placeholder.com/300x200"
 
-        new_service = Service(name = name, yob = yob, phone = phone, gender = gender)
+        new_service = Service(name = name, yob = yob, phone = phone, gender = gender, image = image)
         new_service.save()
         return redirect(url_for('admin'))
 
