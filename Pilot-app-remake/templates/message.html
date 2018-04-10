@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Thông báo</title>
+  </head>
+  <body>
+    {%if message == 'sign-in' %}
+    <h1>Đã đăng ký</h1>
+    <a href="{{ url_for('index')}}">Trở lại trang chủ</a>
+
+    {%elif message == 'ordered' %}
+    <h1>Đã gửi yêu cầu</h1>
+    <a href="{{ url_for('index')}}">Trở lại trang chủ</a>
+
+    {%elif message == 'accepted' %}
+    <h1>Yêu cầu đã được xử lý</h1>
+    <a href="{{ url_for('admin')}}">Trở lại trang quản lý</a>
+
+    {%elif message == 'logout' %}
+    <h1>Đã đăng xuất</h1>
+    <a href="{{ url_for('index')}}">Trở lại trang chủ</a>
+    {% endif %}
+  </body>
+</html>

@@ -15,7 +15,7 @@
         <br>
       {{service.height}}
       <br>
-      <a href={{ url_for("show_detail", id_to_find = service.id) }}>Chi tiết</a>
+      <a href="{{ url_for("show_detail", id_to_find = service.id) }}">Chi tiết</a>
 
         <hr>
       {% endfor%}

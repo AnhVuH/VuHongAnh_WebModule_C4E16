@@ -8,26 +8,37 @@
     <h1>Cập nhật thông tin </h1>
     <form  method="post">
     <label>Tên</label>
-    <input type="text" name="name" value= "{{service.name}}">
+    <input type="text" name="name" value= "{{service.name}}" required>
     <br>
     <label>Năm sinh</label>
-    <input type="number" name="yob" value={{service.yob}}>
+    <input type="number" name="yob" value='{{service.yob}}' required>
     <br>
     <label>Giới tính</label>
-    <input type="number" name="gender" value={{service.gender}}>
+    {% if service.gender == 1 %}
+    <input type="radio" name="gender" value= '1' checked>Nam
+    <input type="radio" name="gender" value= '0' >Nữ
+    {%else%}
+    <input type="radio" name="gender" value= '1' >Nam
+    <input type="radio" name="gender" value= '0' checked>Nữ
+    {% endif%}
     <br>
     <label>Chiều cao</label>
-    <input type="number" name="height" value={{service.height}}>
+    <input type="number" name="height" value='{{service.height}}' required>
     <br>
     <label>SĐT</label>
-    <input type="number" name="phone" value={{service.phone}}>
+    <input type="text" name="phone" value="{{service.phone}}">
     <br>
     <label>Địa chỉ</label>
     <input type="text" name="address" value="{{service.address}}">
     <br>
     <label>Trạng thái</label>
-    <input type="radio" name="status" value= 1 checked> Rảnh
-    <input type="radio" name="status" value= 0> Bận
+    {% if service.status  %}
+    <input type="radio" name="status" value= '1' checked> Rảnh
+    <input type="radio" name="status" value= '0'> Bận
+    {% else %}
+    <input type="radio" name="status" value= '1' > Rảnh
+    <input type="radio" name="status" value= '0' checked> Bận
+    {% endif %}
     <br>
     <label>Ảnh</label>
     <img src={{service.image}} alt="Not found" width = 100 height = 100>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Lỗi truy cập</title>
+  </head>
+  <body>
+    {% if error_code == 'error_admin_request' %}
+
+    <h1>Bạn không phải admin. Bạn không có quyền truy cập vào hồ sơ quản lý</h1>
+    <a href="{{ url_for('login')}}">Đăng nhập lại với tư cách admin</a>
+
+    {% elif error_code == 'error_login' %}
+
+    <h1>Lỗi đăng nhập</h1>
+    <a href="{{ url_for('login')}}">Đăng nhập lại</a>
+
+    {% elif error_code == 'error_logout' %}
+
+    <h1>Lỗi đăng xuất</h1>
+    Bạn chưa đăng nhập.
+    <a href="{{ url_for('login')}}">Đăng nhập trước</a>
+
+    {% elif error_code == 'error_sign_in_usermame' %}
+
+    <h1>Lỗi đăng ký</h1>
+    <p>Username đã tồn tại.</p>
+    <a href="{{ url_for('login')}}"> Đăng nhập nếu bạn đã có tài khoản</a>
+    <br>
+    <a href="{{ url_for('sign_in')}}"> Đăng ký với username khác</a>
+
+    {% elif error_code == 'error_sign_in_email' %}
+
+    <h1>Lỗi đăng ký</h1>
+    Email đã được sử dụng.
+    <a href="{{ url_for('sign_in')}}"> Vui lòng sử dụng email khác</a>
+
+    {% elif error_code == 'invalid_email' %}
+
+    <h1>Lỗi đăng ký</h1>
+    Email đã được sử dụng.
+    <a href="{{ url_for('sign_in')}}"> Vui lòng sử dụng email khác</a>
+
+    {% elif error_code == 'error_multi_login' %}
+
+    <h1>Lỗi đăng nhập nhiều lần</h1>
+    Bạn đã đăng nhập.
+    <p><a href="{{ url_for('index')}}"> Trở lại trang chủ</a></p>
+    <p><a href="{{ url_for('logout')}}"> Đăng xuất để đăng nhập tài khoản khác</a></p>
+
+    {% elif error_code == 'error_order' %}
+    Đối tượng này không rảnh. 
+    <p><a href="{{ url_for('index')}}"> Vui lòng chọn người khác </a></p>
+    {% endif %}
+  </body>
+</html>

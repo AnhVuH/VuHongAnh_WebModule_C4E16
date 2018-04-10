@@ -5,7 +5,7 @@
     <title>Mùa đông không lạnh</title>
   </head>
   <body>
-    <img src= {{ service.image }} alt="not found" width = 300 height =200 >
+    <img src= "{{ service.image }}" alt="not found" width = 300 height =200 >
     <h2>{{ service.name }}</h2>
     <p><b>Năm sinh:</b> {{service.yob}}</p>
     <p><b>Cao:</b> {{service.height}}</p>
@@ -15,5 +15,9 @@
     <p><b>Số đo 3 vòng:</b> {% for measurement in service.measurements %}
                              {{ measurement }} {{ '-' if loop.index < 3}}
                             {% endfor %}</p>
+    <p><b>Trạng thái:</b> {% if service.status == True %} Rảnh
+                      {% elif service.status ==False %} Bận
+                      {% endif %}</p>
+    <a href="{{ url_for('order', order_service_id = service.id)}}">Yêu cầu dịch vụ</a>
   </body>
 </html>
