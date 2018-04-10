@@ -170,17 +170,31 @@ def check_order():
     orders = Order.objects(is_accepted = False)
     return render_template("check-order.html", orders = orders)
 
-@app.route('/request_accepted/<id_accepted>')
-def request_accepted(id_accepted):
-    order_accepted = Order.objects.with_id(id_accepted)
-    order_accepted.update(set__is_accepted= True)
-    order_accepted.reload()
-    gmail = GMail('honganhc4e16@gmail.com','c4e162018')
-    msg = Message("Thông báo chấp nhận yêu cầu",to=order_accepted.user_id.email,text="Yêu cầu của bạn đã được xử lý, chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất. Cảm ơn bạn đã sử dụng dịch vụ của 'Mùa Đông Không Lạnh'")
-    gmail.send(msg)
-    order_accepted.service_id.update(set__status=False)   #set status of service = False
-    order_accepted.service_id.reload()
-    return render_template('message.html', message='accepted')
+@app.route('/request_accepted/<id_order>/<accepted>')
+def request_accepted(id_order, accepted):
+    order_to_accept = Order.objects.with_id(id_order)
+    if accepted == "True":
+        order_to_accept.update(set__is_accepted= True)
+        order_to_accept.reload()
+        gmail = GMail('honganhc4e16@gmail.com','c4e162018')
+        template ="Yêu cầu của bạn đã với đối tượng {{service_name}} được xử lý, chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất. Cảm ơn bạn đã sử dụng dịch vụ của 'Mùa Đông Không Lạnh'"
+        content = template.replace('{{service_name}}', order_to_accept.service_id.name)
+        msg = Message("Thông báo chấp nhận yêu cầu",to=order_to_accept.user_id.email,text=content)
+        gmail.send(msg)
+        order_to_accept.service_id.update(set__status=False)   #set status of service = False
+        order_to_accept.service_id.reload()
+        return render_template('message.html', message='accepted')
+    elif accepted == "False":
+        gmail = GMail('honganhc4e16@gmail.com','c4e162018')
+        template = "Yêu cầu của bạn với đối tượng {{service_name}} đã bị từ chối. Để biết thêm chi tiết vui lòng liên hệ với người quản lý. Cảm ơn bạn đã sử dụng dịch vụ của 'Mùa Đông Không Lạnh'"
+        content = template.replace('{{service_name}}', order_to_accept.service_id.name)
+        msg = Message("Thông báo từ chối yêu cầu",to=order_to_accept.user_id.email,text= content)
+        gmail.send(msg)
+        order_to_accept.delete()
+        return render_template('message.html', message='cancel')
+    elif accepted == "Spam":
+        order_to_accept.delete()
+        return render_template('message.html', message='cancel')
 
 
 @app.route('/logout')

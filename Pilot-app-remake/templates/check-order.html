@@ -12,7 +12,9 @@
         <th>Đối tác</th>
         <th>Người dùng</th>
         <th>Thời gian yêu cầu</th>
-        <th></th>
+        <th>Chấp thuận</th>
+        <th>Bỏ qua</th>
+        <th>Xóa bớt yêu cầu spam</th>
       </thead>
       <tbody>
         {% for order in orders %}
@@ -21,7 +23,9 @@
           <td>{{order.service_id.name}} </td>
           <td>{{order.user_id.fullname}} </td>
           <td>{{order.time_ordered}} </td>
-          <td><a href="{{ url_for("request_accepted", id_accepted = order.id)}}">Phê duyệt yêu cầu</a></td>
+          <td><a href="{{ url_for("request_accepted", id_order = order.id, accepted = "True" )}}">Phê duyệt yêu cầu</a></td>
+          <td><a href="{{ url_for("request_accepted", id_order = order.id, accepted = "False" )}}">Bỏ qua yêu cầu</a></td>
+          <td><a href="{{ url_for("request_accepted", id_order = order.id, accepted = "Spam" )}}">Xóa</a></td>
         </tr>
         {% endfor %}
       </tbody>

@@ -16,6 +16,14 @@
     {%elif message == 'accepted' %}
     <h1>Yêu cầu đã được xử lý</h1>
     <a href="{{ url_for('admin')}}">Trở lại trang quản lý</a>
+    <br>
+    <a href="{{ url_for('check_order')}}">Tiếp tục xử lý các yêu cầu</a>
+
+    {%elif message == 'cancel' %}
+    <h1>Yêu cầu đã bị hủy</h1>
+    <a href="{{ url_for('admin')}}">Trở lại trang quản lý</a>
+    <br>
+    <a href="{{ url_for('check_order')}}">Tiếp tục xử lý các yêu cầu</a>
 
     {%elif message == 'logout' %}
     <h1>Đã đăng xuất</h1>
