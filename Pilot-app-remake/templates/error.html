@@ -38,7 +38,7 @@
     {% elif error_code == 'invalid_email' %}
 
     <h1>Lỗi đăng ký</h1>
-    Email đã được sử dụng.
+    Email không hợp lệ
     <a href="{{ url_for('sign_in')}}"> Vui lòng sử dụng email khác</a>
 
     {% elif error_code == 'error_multi_login' %}
@@ -49,7 +49,7 @@
     <p><a href="{{ url_for('logout')}}"> Đăng xuất để đăng nhập tài khoản khác</a></p>
 
     {% elif error_code == 'error_order' %}
-    Đối tượng này không rảnh. 
+    Đối tượng này không rảnh.
     <p><a href="{{ url_for('index')}}"> Vui lòng chọn người khác </a></p>
     {% endif %}
   </body>
