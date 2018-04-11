@@ -22,7 +22,8 @@ def search_gender(gender_i):
 
 @app.route('/detail/<id_to_find>')
 def show_detail(id_to_find):
-    if "loged-in" in session:
+    # if "loged-in" in session:
+    if "user_id" in session:
         service = Service.objects.with_id(id_to_find)
         return render_template('detail.html',service = service)
     else:
@@ -30,7 +31,7 @@ def show_detail(id_to_find):
 
 @app.route('/admin')
 def admin():
-    if "loged-in" in session:
+    if "user_id" in session:
         if (User.objects.with_id(session['user_id'])).username == 'admin':  # admin - admin
             all_services = Service.objects()
             return render_template('admin.html', all_services = all_services)
@@ -104,7 +105,8 @@ def update_service(id_to_update):
 @app.route('/sign-in', methods =['GET', 'POST'])
 def sign_in():
     if request.method == 'GET':
-        if 'loged-in' not in session:
+        # if 'loged-in' not in session:
+        if "user_id" not in session:
             return render_template('sign-in.html')
         else:
             return render_template('error.html',error_code = "error_multi_login")
@@ -124,7 +126,7 @@ def sign_in():
         if list(same_username) == [] and list(same_email) ==[]:
             new_user = User(fullname = fullname, email = email, username = username, password = password)
             new_user.save()
-            session["loged-in"] = True
+            # session["loged-in"] = True
             session['user_id'] = str(new_user.id)
             return render_template('message.html', message='sign-in')
         elif list(same_email) != []:
@@ -135,7 +137,7 @@ def sign_in():
 @app.route('/login', methods =['GET', 'POST'])
 def login():
     if request.method == 'GET':
-        if 'loged-in' not in session:
+        if 'user_id' not in session:
             return render_template('login.html')
         else:
             return render_template('error.html',error_code = "error_multi_login")
@@ -150,7 +152,7 @@ def login():
             user = None
         if user is not None:
             user = User.objects.get(username__exact = username, password__exact= password)
-            session["loged-in"] = True
+            # session["loged-in"] = True
             session["user_id"] = str(user.id)
             return redirect(url_for('index'))
         else:
@@ -199,9 +201,9 @@ def request_accepted(id_order, accepted):
 
 @app.route('/logout')
 def logout():
-    if 'loged-in' in session:
-        del session['loged-in']
-        session["user_id"] = None
+    if 'user_id' in session:
+        del session['user_id']
+        # session["user_id"] = None
         return render_template('message.html', message='logout')
     else:
         return render_template('error.html',error_code = "error_logout")
