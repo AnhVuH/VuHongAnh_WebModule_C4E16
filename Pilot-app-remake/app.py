@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request, redirect,url_for, session
 from models.classes import Service, User, Order
 from datetime import datetime
-from gmail import GMail, Message
+# from gmail import GMail, Message
 import mlab
 import re
+from send_mail import send_msg
 
 mlab.connect()
 
@@ -175,23 +176,27 @@ def check_order():
 @app.route('/request_accepted/<id_order>/<accepted>')
 def request_accepted(id_order, accepted):
     order_to_accept = Order.objects.with_id(id_order)
+    service_name = order_to_accept.service_id.name
+    user_email = order_to_accept.user_id.email
     if accepted == "True":
         order_to_accept.update(set__is_accepted= True)
         order_to_accept.reload()
-        gmail = GMail('honganhc4e16@gmail.com','c4e162018')
-        template ="Yêu cầu của bạn đã với đối tượng {{service_name}} được xử lý, chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất. Cảm ơn bạn đã sử dụng dịch vụ của 'Mùa Đông Không Lạnh'"
-        content = template.replace('{{service_name}}', order_to_accept.service_id.name)
-        msg = Message("Thông báo chấp nhận yêu cầu",to=order_to_accept.user_id.email,text=content)
-        gmail.send(msg)
+        # gmail = GMail('honganhc4e16@gmail.com','c4e162018')
+        # template ="Yêu cầu của bạn đã với đối tượng {{service_name}} được xử lý, chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất. Cảm ơn bạn đã sử dụng dịch vụ của 'Mùa Đông Không Lạnh'"
+        # content = template.replace('{{service_name}}', order_to_accept.service_id.name)
+        # msg = Message("Thông báo chấp nhận yêu cầu",to=order_to_accept.user_id.email,text=content)
+        # gmail.send(msg)
+        send_msg(True, service_name, user_email)
         order_to_accept.service_id.update(set__status=False)   #set status of service = False
         order_to_accept.service_id.reload()
         return render_template('message.html', message='accepted')
     elif accepted == "False":
-        gmail = GMail('honganhc4e16@gmail.com','c4e162018')
-        template = "Yêu cầu của bạn với đối tượng {{service_name}} đã bị từ chối. Để biết thêm chi tiết vui lòng liên hệ với người quản lý. Cảm ơn bạn đã sử dụng dịch vụ của 'Mùa Đông Không Lạnh'"
-        content = template.replace('{{service_name}}', order_to_accept.service_id.name)
-        msg = Message("Thông báo từ chối yêu cầu",to=order_to_accept.user_id.email,text= content)
-        gmail.send(msg)
+        # gmail = GMail('honganhc4e16@gmail.com','c4e162018')
+        # template = "Yêu cầu của bạn với đối tượng {{service_name}} đã bị từ chối. Để biết thêm chi tiết vui lòng liên hệ với người quản lý. Cảm ơn bạn đã sử dụng dịch vụ của 'Mùa Đông Không Lạnh'"
+        # content = template.replace('{{service_name}}', order_to_accept.service_id.name)
+        # msg = Message("Thông báo từ chối yêu cầu",to=order_to_accept.user_id.email,text= content)
+        # gmail.send(msg)
+        send_msg(False, service_name, user_email)
         order_to_accept.delete()
         return render_template('message.html', message='cancel')
     elif accepted == "Spam":
