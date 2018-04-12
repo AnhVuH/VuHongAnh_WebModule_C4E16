@@ -20,8 +20,8 @@
         {% for order in orders %}
         <tr>
           <td>{{loop.index}}</td>
-          <td>{{order.service_id.name}} </td>
-          <td>{{order.user_id.fullname}} </td>
+          <td>{{order.service.name}} </td>
+          <td>{{order.user.fullname}} </td>
           <td>{{order.time_ordered}} </td>
           <td><a href="{{ url_for("request_accepted", id_order = order.id, accepted = "True" )}}">Phê duyệt yêu cầu</a></td>
           <td><a href="{{ url_for("request_accepted", id_order = order.id, accepted = "False" )}}">Bỏ qua yêu cầu</a></td>

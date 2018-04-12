@@ -9,9 +9,10 @@
     <p>Bạn là nam:<a href="{{ url_for('search_gender', gender_i = 0) }}"> Tìm kiếm bạn nữ </a> </p>
     <p>Bạn là nữ: <a href="{{ url_for('search_gender', gender_i = 1) }}"> Tìm kiếm bạn nam </a> </p>
     <p>Admin:<a href="{{ url_for('admin') }}"> Đến trang quản lý </a></p>
+
     <p><a href="{{url_for('login')}}">Đăng nhập</a> </p>
     <p><a href="{{url_for('logout')}}">Đăng xuất</a> </p>
-    <p><a href="{{url_for('sign_in')}}">Đăng ký</a> </p>
+    <p><a href="{{url_for('sign_up')}}">Đăng ký</a> </p>
     {% for service in all_services %}
     {{loop.index}}.<img src="http://via.placeholder.com/300x200" alt="not found">
     <br>

@@ -19,7 +19,7 @@ class User(Document):
     fullname = StringField()
 
 class Order(Document):
-    service_id = ReferenceField(Service)
-    user_id = ReferenceField(User)
+    service = ReferenceField(Service)
+    user = ReferenceField(User)
     time_ordered = StringField()
     is_accepted = BooleanField()

@@ -103,12 +103,12 @@ def update_service(id_to_update):
             service.reload()
         return redirect(url_for('admin'))
 
-@app.route('/sign-in', methods =['GET', 'POST'])
-def sign_in():
+@app.route('/sign-up', methods =['GET', 'POST'])
+def sign_up():
     if request.method == 'GET':
         # if 'loged-in' not in session:
         if "user_id" not in session:
-            return render_template('sign-in.html')
+            return render_template('sign-up.html')
         else:
             return render_template('error.html',error_code = "error_multi_login")
     elif request.method == 'POST':
@@ -129,11 +129,11 @@ def sign_in():
             new_user.save()
             # session["loged-in"] = True
             session['user_id'] = str(new_user.id)
-            return render_template('message.html', message='sign-in')
+            return render_template('message.html', message='sign-up')
         elif list(same_email) != []:
-            return render_template('error.html',error_code = "error_sign_in_email")
+            return render_template('error.html',error_code = "error_sign_up_email")
         else:
-            return render_template('error.html',error_code = "error_sign_in_usermame")
+            return render_template('error.html',error_code = "error_sign_up_usermame")
 
 @app.route('/login', methods =['GET', 'POST'])
 def login():
@@ -141,7 +141,8 @@ def login():
         if 'user_id' not in session:
             return render_template('login.html')
         else:
-            return render_template('error.html',error_code = "error_multi_login")
+            # return render_template('error.html',error_code = "error_multi_login")
+            return render_template('index.html')
     elif request.method =='POST':
         form = request.form
         username = form['username']
@@ -155,14 +156,17 @@ def login():
             user = User.objects.get(username__exact = username, password__exact= password)
             # session["loged-in"] = True
             session["user_id"] = str(user.id)
-            return redirect(url_for('index'))
+            if user.username == 'admin':
+                return redirect(url_for('admin'))
+            else:
+                return redirect(url_for('index'))
         else:
             return render_template('error.html',error_code = "error_login")
 
 @app.route('/order/<order_service_id>')
 def order(order_service_id):
     if (Service.objects.with_id(order_service_id)).status:
-        new_order = Order(service_id =order_service_id, user_id =session["user_id"],time_ordered = datetime.now().strftime("%I:%M %p - %d/%m"), is_accepted =False )
+        new_order = Order(service = order_service_id, user =session["user_id"],time_ordered = datetime.now().strftime("%I:%M %p - %d/%m"), is_accepted =False )
         new_order.save()
         return render_template('message.html', message='ordered')
     else:
@@ -176,8 +180,8 @@ def check_order():
 @app.route('/request_accepted/<id_order>/<accepted>')
 def request_accepted(id_order, accepted):
     order_to_accept = Order.objects.with_id(id_order)
-    service_name = order_to_accept.service_id.name
-    user_email = order_to_accept.user_id.email
+    service_name = order_to_accept.service.name
+    user_email = order_to_accept.user.email
     if accepted == "True":
         order_to_accept.update(set__is_accepted= True)
         order_to_accept.reload()
@@ -187,8 +191,8 @@ def request_accepted(id_order, accepted):
         # msg = Message("Thông báo chấp nhận yêu cầu",to=order_to_accept.user_id.email,text=content)
         # gmail.send(msg)
         send_msg(True, service_name, user_email)
-        order_to_accept.service_id.update(set__status=False)   #set status of service = False
-        order_to_accept.service_id.reload()
+        order_to_accept.service.update(set__status=False)   #set status of service = False
+        order_to_accept.service.reload()
         return render_template('message.html', message='accepted')
     elif accepted == "False":
         # gmail = GMail('honganhc4e16@gmail.com','c4e162018')
