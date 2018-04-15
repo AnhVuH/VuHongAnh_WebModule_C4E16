@@ -3,27 +3,18 @@
   <head>
     <meta charset="utf-8">
     <title>Mùa đông không lạnh</title>
+    {% include "metadata.html" %}
+
   </head>
   <body>
-    <h1>Mùa đông không lạnh</h1>
-    <p>Bạn là nam:<a href="{{ url_for('search_gender', gender_i = 0) }}"> Tìm kiếm bạn nữ </a> </p>
-    <p>Bạn là nữ: <a href="{{ url_for('search_gender', gender_i = 1) }}"> Tìm kiếm bạn nam </a> </p>
-    <p>Admin:<a href="{{ url_for('admin') }}"> Đến trang quản lý </a></p>
+    <div class="container">
+      {% include "homepage/navigation.html" %}
+      {% include "homepage/carousel.html" %}
+      {% include "homepage/mission.html" %}
+      {% include "homepage/customer-choice.html" %}
 
-    <p><a href="{{url_for('login')}}">Đăng nhập</a> </p>
-    <p><a href="{{url_for('logout')}}">Đăng xuất</a> </p>
-    <p><a href="{{url_for('sign_up')}}">Đăng ký</a> </p>
-    {% for service in all_services %}
-    {{loop.index}}.<img src="http://via.placeholder.com/300x200" alt="not found">
-    <br>
-    {{service.name}}
-      <br>
-    {{service.yob}}
-      <br>
-    {{service.height}}
-    <br>
-    <a href="{{ url_for("show_detail", id_to_find = service.id) }}">Chi tiết</a>
-    <hr>
-    {% endfor %}
+    </div>
+
+
   </body>
 </html>
