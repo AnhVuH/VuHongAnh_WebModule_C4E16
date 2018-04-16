@@ -2,13 +2,15 @@
   <h3 class = " text-center">Chào mừng các bạn đã đến với Mùa Đông không lạnh</h3>
   <p class = "font-lobster text-center">"Chúng tôi ở đây là để giúp cho bạn có mối quan hệ tốt đẹp với người thân trong khi vẫn giữ được sự tự do và riêng tư cũng như quyết định của bản thân bạn"</p>
   <div class="d-flex justify-content-between h-250px px-5">
-    <div class=" bg-img-fm h-200px w-45 d-flex align-items-center justify-content-end px-5 ">
-      <p class ="text-light font-weight-bold">Bạn là Nam</p>
-
+    <div class = "w-45">
+      <a class=" bg-img-fm h-200px d-flex align-items-center justify-content-end px-5 " href="{{url_for( "search_gender" ,gender_i =0)}}">
+        <p class ="text-light font-weight-bold">Bạn là Nam</p>
+      </a>
     </div>
-    <div class=" bg-img-m h-200px w-45 d-flex align-items-center justify-content-start px-5">
-      <p class ="text-light font-weight-bold">Bạn là Nữ</p>
-
+    <div class="w-45">
+      <a class="bg-img-m h-200px  d-flex align-items-center justify-content-start px-5" href="{{url_for( "search_gender" ,gender_i =1)}}">
+        <p class ="text-light font-weight-bold">Bạn là Nữ</p>
+      </a>
     </div>
 
   </div>
