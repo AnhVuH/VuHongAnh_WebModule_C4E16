@@ -6,10 +6,11 @@
     {% include "metadata.html" %}
     <link rel="stylesheet" href="../static/css/detail.css">
   </head>
-  <body>
-    <div class="container bg-img-detail text-dark d-flex flex-column align-items-center py-5">
-      <img src= "{{ service.image }}" alt="not found" width = 300 height =200 >
-      <ul class="list-group py-5">
+  <body class = "container">
+    <div class="h-200px font-lobster bg-primary"> <h3 class= "text-light font-weight-bold text-center" > Thông tin chi tiết</h3> </div>
+    <div class="h-1000px  bg-img-detail  d-flex flex-column align-items-center pt-5">
+      <img class = "img-detail" src= "{{ service.image }}" alt="not found">
+      <ul class="list-group py-5 font-Roboto font-weight-bold">
         <li class="list-group-item">{{ service.name }}</li>
         <li class="list-group-item">Năm sinh: {{service.yob}}</li>
         <li class="list-group-item">Cao: {{service.height}}</li>
@@ -18,19 +19,18 @@
         <li class="list-group-item">Số đo 3 vòng: {% for measurement in service.measurements %}
                                  {{ measurement }} {{ '-' if loop.index < 3}}
                                 {% endfor %}</li>
-        <li class="list-group-item ">Trạng thái: {% if service.status == True %} Rảnh <i class="far fa-smile"></i>
-                          {% elif service.status ==False %} Bận <i class="far fa-frown"></i>
+        <li class="list-group-item ">Trạng thái: {% if service.status == True %} Rảnh <i class="far fa-smile text-success"></i>
+                          {% elif service.status ==False %} Bận <i class="far fa-frown text-danger"></i>
                           {% endif %}</li>
         <li class="list-group-item ">
           <button type="button" class="btn btn-outline-success">
-            <a href="{{ url_for('order', order_service_id = service.id)}}">Yêu cầu dịch vụ <i class="far fa-heart"></i></a>
+            <a href="{{ url_for('order', order_service_id = service.id)}}">Yêu cầu dịch vụ <i class="far fa-heart text-danger"></i></a>
           </button>
         </li>
-
       </ul>
-
-
     </div>
+
+
 
   </body>
 </html>

@@ -1,7 +1,22 @@
 .bg-img-detail {
-  background-image: url(../image/Cool-background.jpg);
+  background-image: url(../image/Blue-Wallpaper.jpg);
   background-size: contain;
-  background-repeat: repeat-y;
+  /* background-repeat: repeat-y; */
 
+}
 
+.img-detail{
+   width :400px;
+   height :400px;
+   border-radius: 100%;
+}
+
+.h-1000px {
+  height: 1000px;
+}
+.font-lobster{
+  font-family: 'Lobster',cursive;
+}
+.font-Roboto{
+  font-family: 'Roboto', sans-serif;
 }
