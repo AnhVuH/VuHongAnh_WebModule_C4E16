@@ -4,23 +4,32 @@
     <meta charset="utf-8">
     <title>Mùa đông không lạnh</title>
     {% include "metadata.html" %}
+    <link rel="stylesheet" href="../static/css/detail.css">
   </head>
   <body>
-    <div class="container bg-img-detail text-light d-flex flex-column align-items-center py-5">
+    <div class="container bg-img-detail text-dark d-flex flex-column align-items-center py-5">
       <img src= "{{ service.image }}" alt="not found" width = 300 height =200 >
-      <h2>{{ service.name }}</h2>
-      <p><b>Năm sinh:</b> {{service.yob}}</p>
-      <p><b>Cao:</b> {{service.height}}</p>
-      <p><b>Số điện thoại:</b> {{service.phone}}</p>
-      <p><b>Địa chỉ:</b> {{service.address}}</p>
-      <p><b>Mô tả:</b> {{service.description}}</p>
-      <p><b>Số đo 3 vòng:</b> {% for measurement in service.measurements %}
-                               {{ measurement }} {{ '-' if loop.index < 3}}
-                              {% endfor %}</p>
-      <p><b>Trạng thái:</b> {% if service.status == True %} Rảnh
-                        {% elif service.status ==False %} Bận
-                        {% endif %}</p>
-      <a href="{{ url_for('order', order_service_id = service.id)}}">Yêu cầu dịch vụ</a>
+      <ul class="list-group py-5">
+        <li class="list-group-item">{{ service.name }}</li>
+        <li class="list-group-item">Năm sinh: {{service.yob}}</li>
+        <li class="list-group-item">Cao: {{service.height}}</li>
+        <li class="list-group-item">Số điện thoại:{{service.phone}}</li>
+        <li class="list-group-item">Mô tả: {{service.description}}</li>
+        <li class="list-group-item">Số đo 3 vòng: {% for measurement in service.measurements %}
+                                 {{ measurement }} {{ '-' if loop.index < 3}}
+                                {% endfor %}</li>
+        <li class="list-group-item ">Trạng thái: {% if service.status == True %} Rảnh <i class="far fa-smile"></i>
+                          {% elif service.status ==False %} Bận <i class="far fa-frown"></i>
+                          {% endif %}</li>
+        <li class="list-group-item ">
+          <button type="button" class="btn btn-outline-success">
+            <a href="{{ url_for('order', order_service_id = service.id)}}">Yêu cầu dịch vụ <i class="far fa-heart"></i></a>
+          </button>
+        </li>
+
+      </ul>
+
+
     </div>
 
   </body>

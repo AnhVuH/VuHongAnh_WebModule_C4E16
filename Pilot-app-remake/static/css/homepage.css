@@ -18,16 +18,11 @@
   background-size: 100% 100%;
 }
 
-.bg-img-detail {
-  background-image: url(../image/background-1.jpg);
-  background-size: contain;
-  background-repeat: repeat-y;
-}
 
 #customer-choice {
   background-image: url(../image/night.jpg);
   background-size: contain;
-  background-repeat: repeat-y;
+  /* background-repeat: repeat-y; */
 }
 
 .h-50px {
