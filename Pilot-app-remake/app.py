@@ -11,10 +11,14 @@ mlab.connect()
 app = Flask(__name__)
 app.secret_key = 'a-useless-key'
 
-@app.route('/')
-def index():
+@app.route('/',defaults ={'loged_in': None})
+@app.route('/<loged_in>')
+def index(loged_in):
     all_services = Service.objects()
-    return render_template('index.html',all_services = all_services)
+    if loged_in == None and "user_id" in session:
+        return render_template('index.html',all_services = all_services, loged = "loged_in")
+    else:
+        return render_template('index.html',all_services = all_services, loged = loged_in)
 
 @app.route('/search/<int:gender_i>')
 def search_gender(gender_i):
@@ -106,7 +110,6 @@ def update_service(id_to_update):
 @app.route('/sign-up', methods =['GET', 'POST'])
 def sign_up():
     if request.method == 'GET':
-        # if 'loged-in' not in session:
         if "user_id" not in session:
             return render_template('sign-up.html')
         else:
@@ -127,7 +130,6 @@ def sign_up():
         if list(same_username) == [] and list(same_email) ==[]:
             new_user = User(fullname = fullname, email = email, username = username, password = password)
             new_user.save()
-            # session["loged-in"] = True
             session['user_id'] = str(new_user.id)
             return render_template('message.html', message='sign-up')
         elif list(same_email) != []:
@@ -142,7 +144,7 @@ def login():
             return render_template('login.html')
         else:
             # return render_template('error.html',error_code = "error_multi_login")
-            return render_template('index.html')
+            return redirect(url_for('index', loged_in = "loged_in"))
     elif request.method =='POST':
         form = request.form
         username = form['username']
@@ -154,12 +156,12 @@ def login():
             user = None
         if user is not None:
             user = User.objects.get(username__exact = username, password__exact= password)
-            # session["loged-in"] = True
+
             session["user_id"] = str(user.id)
             if user.username == 'admin':
                 return redirect(url_for('admin'))
             else:
-                return redirect(url_for('index'))
+                return redirect(url_for('index', loged_in = "loged_in"))
         else:
             return render_template('error.html',error_code = "error_login")
 
@@ -212,7 +214,7 @@ def request_accepted(id_order, accepted):
 def logout():
     if 'user_id' in session:
         del session['user_id']
-        # session["user_id"] = None
+
         return render_template('message.html', message='logout')
     else:
         return render_template('error.html',error_code = "error_logout")

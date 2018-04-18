@@ -3,14 +3,16 @@
   <head>
     <meta charset="utf-8">
     <title>Mùa đông không lạnh</title>
+    {% include "metadata.html" %}
   </head>
-  <body>
-    <h1>Danh sách đối tượng </h1>
-    <a href="{{ url_for('create')}}"><button type="button" name="button">Thêm đối tượng</button> </a>
-    <a href="{{ url_for('check_order')}}">Xem các yêu cầu dịch vụ</a>
-    <br>
-    <a href="{{ url_for('index')}}">Trở lại trang chủ</a>
-    <table border="2px">
+  <body class = "container">
+    <h1 class = "text-center">Danh sách đối tượng </h1>
+    <div class="p-2">
+      <a class = "btn btn-success" href="{{ url_for('create')}}">Thêm đối tượng</button> </a>
+      <a class = "btn btn-success" href="{{ url_for('check_order')}}">Xem các yêu cầu dịch vụ</a>
+      <a class = "btn btn-primary"href="{{ url_for('index', loged_in = "loged_in")}}">Trở lại trang chủ</a>
+    </div>
+    <table class ="text-center border-primary" border=2px>
       <thead>
         <th>STT</th>
         <th>Tên</th>
@@ -45,9 +47,9 @@
           <td>{% for measurement in service.measurements %}
                                    {{ measurement }} {{ '-' if loop.index < 3}}
                                   {% endfor %}</td>
-          <td> <a href="{{ url_for('update_service', id_to_update = service.id) }}">Sửa</a>
+          <td> <a class = "btn btn-outline-primary" href="{{ url_for('update_service', id_to_update = service.id) }}">Sửa</a>
             <br>
-              <a href="{{ url_for('delete', id_to_del = service.id) }}">Xóa</a>
+              <a class = "btn btn-outline-primary" href="{{ url_for('delete', id_to_del = service.id) }}">Xóa</a>
           </td>
         </tr>
         {% endfor %}

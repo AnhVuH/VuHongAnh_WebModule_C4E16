@@ -3,28 +3,32 @@
   <head>
     <meta charset="utf-8">
     <title>Sign up</title>
+    {% include "metadata.html" %}
   </head>
-  <body>
-    <form method="post">
-      <h1>Đăng ký tài khoản</h1>
-      <label>Tên đầy đủ:</label>
-      <br>
-      <input type="text" name="fullname" value="Nguyễn Văn A" required>
-      <br>
-      <label>Email:</label>
-      <br>
-      <input type="text" name="email" value="abc@xyz.com" required>
-      <br>
-      <label>Tên đăng nhập:</label>
-      <br>
-      <input type="text" name="username" value="" required>
-      <br>
-      <label>Mật khẩu:</label>
-      <br>
-      <input type="password" name="password" value="" required>
-      <br>
-      <input type="submit" >
-    </form>
+  <body class= "container">
+    <h1 class ="text-center">Đăng ký tài khoản</h1>
+    <div class="d-flex flex-column align-items-center">
+      <form method="post">
+        <label>Tên đầy đủ:</label>
+        <br>
+        <input type="text" name="fullname" placeholder="Nguyễn Văn A" required>
+        <br>
+        <label>Email:</label>
+        <br>
+        <input type="text" name="email" placeholder="abc@xyz.com" required>
+        <br>
+        <label>Tên đăng nhập:</label>
+        <br>
+        <input type="text" name="username" value="" required>
+        <br>
+        <label>Mật khẩu:</label>
+        <br>
+        <input type="password" name="password" value="" required>
+        <br>
+        <input type="submit" >
+      </form>
+    </div>
+
 
   </body>
 </html>

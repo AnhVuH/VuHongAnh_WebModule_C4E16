@@ -7,11 +7,11 @@
   <body>
     {%if message == 'sign-up' %}
     <h1>Đã đăng ký</h1>
-    <a href="{{ url_for('index')}}">Trở lại trang chủ</a>
+    <a href="{{ url_for('index',loged_in = "loged_in")}}">Trở lại trang chủ</a>
 
     {%elif message == 'ordered' %}
     <h1>Đã gửi yêu cầu</h1>
-    <a href="{{ url_for('index')}}">Trở lại trang chủ</a>
+    <a href="{{ url_for('index',loged_in = "loged_in")}}">Trở lại trang chủ</a>
 
     {%elif message == 'accepted' %}
     <h1>Yêu cầu đã được xử lý</h1>
